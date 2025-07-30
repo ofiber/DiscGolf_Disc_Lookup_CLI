@@ -759,5 +759,29 @@ namespace DiscGolf_Disc_Lookup_CLI
                 throw new KeyNotFoundException($"No discs found for type '{type}'.");
             }
         }
+
+        public static List<DiscGolfDisc> GetDiscsByMultipleCriteria(string type, double? speed = null, double? fade = null,
+            double? glide = null, double? turn = null, string brand = null)
+        {
+            var query = Discs.AsQueryable();
+
+            if (!string.IsNullOrWhiteSpace(type))
+                query = query.Where(d => d.Type.Equals(type, StringComparison.OrdinalIgnoreCase));
+            if (speed.HasValue)
+                query = query.Where(d => d.Speed == speed.Value);
+            if (fade.HasValue)
+                query = query.Where(d => d.Fade == fade.Value);
+            if (glide.HasValue)
+                query = query.Where(d => d.Glide == glide.Value);
+            if (turn.HasValue)
+                query = query.Where(d => d.Turn == turn.Value);
+            if (!string.IsNullOrWhiteSpace(brand))
+                query = query.Where(d => d.Brand.Equals(brand, StringComparison.OrdinalIgnoreCase));
+
+            var results = query.ToList();
+            if (results.Count == 0)
+                throw new KeyNotFoundException("No discs found matching the specified criteria.");
+            return results;
+        }
     }
 }

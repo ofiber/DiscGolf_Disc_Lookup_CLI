@@ -7,11 +7,12 @@
     public class Disc_Lookup_CLI
     {
         private static readonly Style highlightStyle = new Style(new Color(0, 191, 255)); // deepskyblue2
-        private static readonly List<DiscGolfDisc> discs = DiscList.Discs; // Fixed: Accessing static member directly with the class name
 
         public static void Main()
         {
             Menu();
+
+            Console.ReadKey(); // Wait for user input before closing
         }
 
         private static void Menu()
@@ -23,7 +24,7 @@
             var selection = AnsiConsole.Prompt(
                 new SelectionPrompt<string>()
                 .Title("Please select an option")
-                .PageSize(4)
+                .PageSize(5)
                 .HighlightStyle(highlightStyle)
                 .AddChoices(
                     new[]
@@ -31,6 +32,7 @@
                         "Get Disc by NAME",
                         "Get Discs by BRAND",
                         "Get Discs by TYPE",
+                        "Advanced Search",
                         "Exit"
                     }));
 
@@ -42,10 +44,114 @@
                 GetByBrand();
             else if (selection == "Get Discs by TYPE")
                 GetByType();
+            else if (selection == "Advanced Search")
+                AdvancedSearch();
             else
                 AnsiConsole.MarkupLine("[red]Invalid selection. Please try again.[/]");
+        }
 
+        private static void AdvancedSearch()
+        {
+            WriteAscii(true);
+            Console.WriteLine("\n\n\n");
 
+            var criteria = AnsiConsole.Prompt(
+                new MultiSelectionPrompt<string>()
+                    .Title("Select search criteria")
+                    .PageSize(6)
+                    .HighlightStyle(highlightStyle)
+                    .InstructionsText("[grey](Press [blue]<space>[/] to toggle, [green]<enter>[/] to submit)[/]")
+                    .AddChoices(
+                        new[]
+                        {
+                            "Type",
+                            "Speed",
+                            "Glide",
+                            "Turn",
+                            "Fade",
+                            "Brand"
+                        }));
+
+            if (criteria.Count == 0)
+            {
+                AnsiConsole.MarkupLine("[red]No criteria selected. Returning to main menu.[/]");
+                return;
+            }
+
+            string type = null, brand = null;
+            double? speed = null, glide = null, turn = null, fade = null;
+
+            if (criteria.Contains("Type"))
+            {
+                type = AnsiConsole.Prompt(
+                    new SelectionPrompt<string>()
+                        .Title("Select disc type (or leave blank for any)")
+                        .PageSize(4)
+                        .HighlightStyle(highlightStyle)
+                        .AddChoices(
+                            new[]
+                            {
+                                "Distance Driver",
+                                "Fairway Driver",
+                                "Mid Range",
+                                "Putt & Approach",
+                            }));
+                if (string.IsNullOrEmpty(type)) type = null;
+            }
+
+            if (criteria.Contains("Speed"))
+            {
+                var speedStr = AnsiConsole.Ask<string>("Enter Speed (or leave blank for any):");
+                speed = double.TryParse(speedStr, out var s) ? s : (double?)null;
+            }
+
+            if (criteria.Contains("Glide"))
+            {
+                var glideStr = AnsiConsole.Ask<string>("Enter Glide (or leave blank for any):");
+                glide = double.TryParse(glideStr, out var g) ? g : (double?)null;
+            }
+
+            if (criteria.Contains("Turn"))
+            {
+                var turnStr = AnsiConsole.Ask<string>("Enter Turn (or leave blank for any):");
+                turn = double.TryParse(turnStr, out var t) ? t : (double?)null;
+            }
+
+            if (criteria.Contains("Fade"))
+            {
+                var fadeStr = AnsiConsole.Ask<string>("Enter Fade (or leave blank for any):");
+                fade = double.TryParse(fadeStr, out var f) ? f : (double?)null;
+            }
+
+            if (criteria.Contains("Brand"))
+            {
+                AnsiConsole.MarkupLine("[grey]Available brands:[/]");
+                brand = AnsiConsole.Prompt(
+                new SelectionPrompt<string>()
+                .Title("Please select a brand")
+                .PageSize(10)
+                .HighlightStyle(highlightStyle)
+                .AddChoices(
+                    new[]
+                    {
+                        "Axiom Discs", "Clash Discs", "DGA", "Discmania", "Discraft", "Dynamic Discs",
+                        "Gateway", "Innova", "Kastaplast", "Latitude 64", "Millenium", "Mint", "MVP",
+                        "Prodigy", "RPM", "Streamline", "Thought Space Athletics", "Westside Discs", "Yikun"
+                    }));
+
+                if (string.IsNullOrWhiteSpace(brand)) brand = null;
+            }
+
+            try
+            {
+                var discs = DiscList.GetDiscsByMultipleCriteria(type, speed, fade, glide, turn, brand);
+                WriteTable(discs);
+            }
+            catch (KeyNotFoundException ex)
+            {
+                WriteAscii(true);
+                AnsiConsole.MarkupLine($"[red]{ex.Message}[/]");
+            }
         }
 
         private static void GetByType()
