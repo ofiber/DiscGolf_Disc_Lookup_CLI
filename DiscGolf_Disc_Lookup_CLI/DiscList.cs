@@ -584,35 +584,35 @@ namespace DiscGolf_Disc_Lookup_CLI
             new DiscGolfDisc("Temple", "Thought Space Athletics", "Putt & Approach", 4, 3, 0, 3),
             new DiscGolfDisc("Muse", "Thought Space Athletics", "Putt & Approach", 3, 3, 0, 2),
             new DiscGolfDisc("Praxis", "Thought Space Athletics", "Putt & Approach", 3, 3, 0, 1),
-            new DiscGolfDisc("Adder", "Westside", "Distance Driver", 13, 5, 0, 4),
-            new DiscGolfDisc("Catapult", "Westside", "Distance Driver", 14, 4, -0.5, 3),
-            new DiscGolfDisc("Destiny", "Westside", "Distance Driver", 14, 6, -2, 3),
-            new DiscGolfDisc("Giant", "Westside", "Distance Driver", 13, 4, 0, 3.5),
-            new DiscGolfDisc("King", "Westside", "Distance Driver", 14, 5, -1, 4),
-            new DiscGolfDisc("Prince", "Westside", "Distance Driver", 13, 5, 0, 3),
-            new DiscGolfDisc("Queen", "Westside", "Distance Driver", 14, 5, -3, 2),
-            new DiscGolfDisc("Sword", "Westside", "Distance Driver", 12, 5, -0.5, 2),
-            new DiscGolfDisc("Tide", "Westside", "Distance Driver", 12, 6, -0.5, 3),
-            new DiscGolfDisc("War Horse", "Westside", "Distance Driver", 13, 4, 0, 4),
-            new DiscGolfDisc("World", "Westside", "Distance Driver", 14, 4, -0.5, 3),
-            new DiscGolfDisc("Ahti", "Westside", "Fairway Driver", 9, 3, 0, 4),
-            new DiscGolfDisc("Fortress", "Westside", "Fairway Driver", 10, 4, 0, 3),
-            new DiscGolfDisc("Hatchet", "Westside", "Fairway Driver", 9, 6, -2, 1),
-            new DiscGolfDisc("Longbowman", "Westside", "Fairway Driver", 9, 4, 0, 3),
-            new DiscGolfDisc("Sampo", "Westside", "Fairway Driver", 10, 4, -1, 2),
-            new DiscGolfDisc("Seer", "Westside", "Fairway Driver", 7, 5, -2, 1),
-            new DiscGolfDisc("Stag", "Westside", "Fairway Driver", 8, 6, -1, 2),
-            new DiscGolfDisc("Underworld", "Westside", "Fairway Driver", 7, 6, -3, 1),
-            new DiscGolfDisc("Anvil", "Westside", "Mid Range", 4, 2, 0, 4),
-            new DiscGolfDisc("Bard", "Westside", "Mid Range", 5, 4, 0, 3),
-            new DiscGolfDisc("Pine", "Westside", "Mid Range", 5, 4, 0, 2),
-            new DiscGolfDisc("Warship", "Westside", "Mid Range", 5, 6, 0, 1),
-            new DiscGolfDisc("Crown", "Westside", "Putt & Approach", 3, 4, 0, 1),
-            new DiscGolfDisc("Harp", "Westside", "Putt & Approach", 4, 3, 0, 3),
-            new DiscGolfDisc("Maiden", "Westside", "Putt & Approach", 3, 4, 0, 1),
-            new DiscGolfDisc("Shield", "Westside", "Putt & Approach", 3, 3, 0, 1),
-            new DiscGolfDisc("Swan", "Westside", "Putt & Approach", 3, 3, -1, 0),
-            new DiscGolfDisc("Swan 1 Reborn", "Westside", "Putt & Approach", 3, 3, -2.5, 0),
+            new DiscGolfDisc("Adder", "Westside Discs", "Distance Driver", 13, 5, 0, 4),
+            new DiscGolfDisc("Catapult", "Westside Discs", "Distance Driver", 14, 4, -0.5, 3),
+            new DiscGolfDisc("Destiny", "Westside Discs", "Distance Driver", 14, 6, -2, 3),
+            new DiscGolfDisc("Giant", "Westside Discs", "Distance Driver", 13, 4, 0, 3.5),
+            new DiscGolfDisc("King", "Westside Discs", "Distance Driver", 14, 5, -1, 4),
+            new DiscGolfDisc("Prince", "Westside Discs", "Distance Driver", 13, 5, 0, 3),
+            new DiscGolfDisc("Queen", "Westside Discs", "Distance Driver", 14, 5, -3, 2),
+            new DiscGolfDisc("Sword", "Westside Discs", "Distance Driver", 12, 5, -0.5, 2),
+            new DiscGolfDisc("Tide", "Westside Discs", "Distance Driver", 12, 6, -0.5, 3),
+            new DiscGolfDisc("War Horse", "Westside Discs", "Distance Driver", 13, 4, 0, 4),
+            new DiscGolfDisc("World", "Westside Discs", "Distance Driver", 14, 4, -0.5, 3),
+            new DiscGolfDisc("Ahti", "Westside Discs", "Fairway Driver", 9, 3, 0, 4),
+            new DiscGolfDisc("Fortress", "Westside Discs", "Fairway Driver", 10, 4, 0, 3),
+            new DiscGolfDisc("Hatchet", "Westside Discs", "Fairway Driver", 9, 6, -2, 1),
+            new DiscGolfDisc("Longbowman", "Westside Discs", "Fairway Driver", 9, 4, 0, 3),
+            new DiscGolfDisc("Sampo", "Westside Discs", "Fairway Driver", 10, 4, -1, 2),
+            new DiscGolfDisc("Seer", "Westside Discs", "Fairway Driver", 7, 5, -2, 1),
+            new DiscGolfDisc("Stag", "Westside Discs", "Fairway Driver", 8, 6, -1, 2),
+            new DiscGolfDisc("Underworld", "Westside Discs", "Fairway Driver", 7, 6, -3, 1),
+            new DiscGolfDisc("Anvil", "Westside Discs", "Mid Range", 4, 2, 0, 4),
+            new DiscGolfDisc("Bard", "Westside Discs", "Mid Range", 5, 4, 0, 3),
+            new DiscGolfDisc("Pine", "Westside Discs", "Mid Range", 5, 4, 0, 2),
+            new DiscGolfDisc("Warship", "Westside Discs", "Mid Range", 5, 6, 0, 1),
+            new DiscGolfDisc("Crown", "Westside Discs", "Putt & Approach", 3, 4, 0, 1),
+            new DiscGolfDisc("Harp", "Westside Discs", "Putt & Approach", 4, 3, 0, 3),
+            new DiscGolfDisc("Maiden", "Westside Discs", "Putt & Approach", 3, 4, 0, 1),
+            new DiscGolfDisc("Shield", "Westside Discs", "Putt & Approach", 3, 3, 0, 1),
+            new DiscGolfDisc("Swan", "Westside Discs", "Putt & Approach", 3, 3, -1, 0),
+            new DiscGolfDisc("Swan 1 Reborn", "Westside Discs", "Putt & Approach", 3, 3, -2.5, 0),
             new DiscGolfDisc("She Gong", "Yikun", "Distance Driver", 13, 5, 0, 2),
             new DiscGolfDisc("Twin Swords", "Yikun", "Distance Driver", 12, 5, 0, 2),
             new DiscGolfDisc("Tomahawk", "Yikun", "Mid Range", 5, 6, 0, 0),
@@ -744,6 +744,19 @@ namespace DiscGolf_Disc_Lookup_CLI
             else
             {
                 throw new KeyNotFoundException($"No discs found for brand '{brand}'.");
+            }
+        }
+
+        public static List<DiscGolfDisc> GetDiscsByType(string type)
+        {
+            List<DiscGolfDisc> discs = Discs.Where(d => d.Type.Equals(type, StringComparison.OrdinalIgnoreCase)).ToList();
+            if (discs.Count > 0)
+            {
+                return discs;
+            }
+            else
+            {
+                throw new KeyNotFoundException($"No discs found for type '{type}'.");
             }
         }
     }

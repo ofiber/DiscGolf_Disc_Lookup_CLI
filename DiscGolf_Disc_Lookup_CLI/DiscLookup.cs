@@ -23,7 +23,7 @@
             var selection = AnsiConsole.Prompt(
                 new SelectionPrompt<string>()
                 .Title("Please select an option")
-                .PageSize(3)
+                .PageSize(4)
                 .HighlightStyle(highlightStyle)
                 .AddChoices(
                     new[]
@@ -40,17 +40,79 @@
                 GetByName();
             else if (selection == "Get Discs by BRAND")
                 GetByBrand();
-                
+            else if (selection == "Get Discs by TYPE")
+                GetByType();
+            else
+                AnsiConsole.MarkupLine("[red]Invalid selection. Please try again.[/]");
+
+
+        }
+
+        private static void GetByType()
+        {
+            WriteAscii(true);
+
+            Console.WriteLine("\n\n\n");
+
+            var selection = AnsiConsole.Prompt(
+                new SelectionPrompt<string>()
+                .Title("Please select a disc type")
+                .PageSize(4)
+                .HighlightStyle(highlightStyle)
+                .AddChoices(
+                    new[]
+                    {
+                        "Distance Driver",
+                        "Fairway Driver",
+                        "Midrange",
+                        "Putt & Approach"
+                    }));
+
+            List<DiscGolfDisc> disc = new List<DiscGolfDisc>();
+
+            disc = DiscList.GetDiscsByType(selection);
+
+            if (disc.Count == 0)
+            {
+                AnsiConsole.MarkupLine("[red]No discs found for the selected type.[/]");
+            }
+            else
+            {
+                WriteTable(disc);
+            }
         }
 
         private static void GetByBrand()
         {
-            AnsiConsole.Write("\n\nEnter a disc brand: ");
-            string brand = Console.ReadLine();
+            WriteAscii(true);
 
-            List<DiscGolfDisc> disc = DiscList.GetDiscsByBrand(brand);
+            Console.WriteLine("\n\n\n");
 
-            WriteTable(disc);
+            var selection = AnsiConsole.Prompt(
+                new SelectionPrompt<string>()
+                .Title("Please select a brand")
+                .PageSize(10)
+                .HighlightStyle(highlightStyle)
+                .AddChoices(
+                    new[]
+                    {
+                        "Axiom Discs", "Clash Discs", "DGA", "Discmania", "Discraft", "Dynamic Discs",
+                        "Gateway", "Innova", "Kastaplast", "Latitude 64", "Millenium", "Mint", "MVP",
+                        "Prodigy", "RPM", "Streamline", "Thought Space Athletics", "Westside Discs", "Yikun"
+                    }));
+
+            List<DiscGolfDisc> disc = new List<DiscGolfDisc>();
+
+            disc = DiscList.GetDiscsByBrand(selection);
+
+            if (disc.Count == 0)
+            {
+                AnsiConsole.MarkupLine("[red]No discs found for the selected brand.[/]");
+            }
+            else
+            {
+                WriteTable(disc);
+            }
         }
 
         private static void GetByName()
