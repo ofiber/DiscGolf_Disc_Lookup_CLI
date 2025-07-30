@@ -30,6 +30,7 @@
                     {
                         "Get Disc by NAME",
                         "Get Discs by BRAND",
+                        "Get Discs by TYPE",
                         "Exit"
                     }));
 
