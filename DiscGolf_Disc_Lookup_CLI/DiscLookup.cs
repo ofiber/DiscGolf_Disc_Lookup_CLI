@@ -7,15 +7,21 @@
     public class Disc_Lookup_CLI
     {
         private static readonly Style highlightStyle = new Style(new Color(0, 191, 255)); // deepskyblue2
+        private static readonly Spinner spinner = AnsiConsole.Profile.Capabilities.Unicode ? Spinner.Known.Dots : Spinner.Known.Default;
 
         public static void Main()
         {
-            Menu();
+            int exitValue = -1;
+
+            do
+            {
+                exitValue = Menu();
+            } while (exitValue != 0);
 
             Console.ReadKey(); // Wait for user input before closing
         }
 
-        private static void Menu()
+        private static int Menu()
         {
             WriteAscii(true);
 
@@ -37,7 +43,7 @@
                     }));
 
             if (selection == "Exit")
-                Environment.Exit(0);
+                return 0;
             else if (selection == "Get Disc by NAME")
                 GetByName();
             else if (selection == "Get Discs by BRAND")
@@ -48,12 +54,16 @@
                 AdvancedSearch();
             else
                 AnsiConsole.MarkupLine("[red]Invalid selection. Please try again.[/]");
+
+            return -1; // -1 to indicate error
         }
 
         private static void AdvancedSearch()
         {
             WriteAscii(true);
             Console.WriteLine("\n\n\n");
+
+            bool invalidEntry = false;
 
             var criteria = AnsiConsole.Prompt(
                 new MultiSelectionPrompt<string>()
@@ -99,29 +109,99 @@
                 if (string.IsNullOrEmpty(type)) type = null;
             }
 
-            if (criteria.Contains("Speed"))
+            do
             {
-                var speedStr = AnsiConsole.Ask<string>("Enter Speed (or leave blank for any):");
-                speed = double.TryParse(speedStr, out var s) ? s : (double?)null;
-            }
+                if (criteria.Contains("Speed"))
+                {
+                    var speedStr = AnsiConsole.Ask<string>("Enter Speed ( 1 <-> 14 ):");
+                    speed = double.TryParse(speedStr, out var s) ? s : (double?)null;
 
-            if (criteria.Contains("Glide"))
-            {
-                var glideStr = AnsiConsole.Ask<string>("Enter Glide (or leave blank for any):");
-                glide = double.TryParse(glideStr, out var g) ? g : (double?)null;
-            }
+                    if (speed < 1 || speed > 14)
+                    {
+                        AnsiConsole.MarkupLine("[red]Speed must be between 1 and 14. Please try again.[/]");
+                        Thread.Sleep(2500);
 
-            if (criteria.Contains("Turn"))
-            {
-                var turnStr = AnsiConsole.Ask<string>("Enter Turn (or leave blank for any):");
-                turn = double.TryParse(turnStr, out var t) ? t : (double?)null;
-            }
+                        invalidEntry = true;
 
-            if (criteria.Contains("Fade"))
+                        WriteAscii(true);
+                        Console.WriteLine("\n\n\n");
+                    }
+                    else
+                        invalidEntry = false; // Valid entry
+                }
+
+            } while (invalidEntry);
+
+            do
             {
-                var fadeStr = AnsiConsole.Ask<string>("Enter Fade (or leave blank for any):");
-                fade = double.TryParse(fadeStr, out var f) ? f : (double?)null;
-            }
+                if (criteria.Contains("Glide"))
+                {
+                    var glideStr = AnsiConsole.Ask<string>("Enter Glide ( 1 <-> 7 ):");
+                    glide = double.TryParse(glideStr, out var g) ? g : (double?)null;
+
+                    if (glide < 1 || glide > 7)
+                    {
+                        AnsiConsole.MarkupLine("[red]Glide must be between 1 and 7. Please try again.[/]");
+                        Thread.Sleep(2500);
+
+                        invalidEntry = true;
+
+                        WriteAscii(true);
+                        Console.WriteLine("\n\n\n");
+                    }
+                    else
+                        invalidEntry = false; // Valid entry
+                }
+
+            } while (invalidEntry);
+
+
+            do
+            {
+                if (criteria.Contains("Turn"))
+                {
+                    var turnStr = AnsiConsole.Ask<string>("Enter Turn ( +1 <-> -5):");
+                    turn = double.TryParse(turnStr, out var t) ? t : (double?)null;
+
+                    if (turn > 1 || turn < -5)
+                    {
+                        AnsiConsole.MarkupLine("[red]Turn must be between +1 and -5. Please try again.[/]");
+                        Thread.Sleep(2500);
+
+                        invalidEntry = true;
+
+                        WriteAscii(true);
+                        Console.WriteLine("\n\n\n");
+                    }
+                    else
+                        invalidEntry = false; // Valid entry
+                }
+
+            } while (invalidEntry);
+
+            do
+            {
+                if (criteria.Contains("Fade"))
+                {
+                    var fadeStr = AnsiConsole.Ask<string>("Enter Fade ( 0 <-> 5):");
+                    fade = double.TryParse(fadeStr, out var f) ? f : (double?)null;
+
+                    if (fade < 0 || fade > 5)
+                    {
+                        AnsiConsole.MarkupLine("[red]Fade must be between 0 and 5. Please try again.[/]");
+                        Thread.Sleep(2500);
+
+                        invalidEntry = true;
+                        
+                        WriteAscii(true);
+                        Console.WriteLine("\n\n\n");
+                    }
+                    else
+                        invalidEntry = false; // Valid entry
+                }
+
+            } while (invalidEntry);
+
 
             if (criteria.Contains("Brand"))
             {
@@ -151,6 +231,7 @@
             {
                 WriteAscii(true);
                 AnsiConsole.MarkupLine($"[red]{ex.Message}[/]");
+                Thread.Sleep(2500);
             }
         }
 
@@ -170,7 +251,7 @@
                     {
                         "Distance Driver",
                         "Fairway Driver",
-                        "Midrange",
+                        "Mid Range",
                         "Putt & Approach"
                     }));
 
@@ -226,6 +307,24 @@
             AnsiConsole.Write("\n\nEnter a disc name: ");
             string name = Console.ReadLine();
 
+            if (string.IsNullOrEmpty(name))
+            {
+                //AnsiConsole.MarkupLine("[red]No name entered. Returning to main menu.[/]");
+
+                AnsiConsole.Status()
+                    .Spinner(spinner)
+                    .Start("[red]No name entered. Returning to main menu.[/]", ctx =>
+                    {
+                        Thread.Sleep(2500); // Simulate some delay
+                    });
+
+                return;
+            }
+
+            // All disc names are stored in Title Case, so we need to ensure the first letter is uppercase
+            if (name.Substring(0, 1).ToLower() == name.Substring(0, 1))
+                name = name.Replace(name.Substring(0, 1), name.Substring(0, 1).ToUpper());
+
             List<DiscGolfDisc> disc = new List<DiscGolfDisc>();
             disc.Add(DiscList.GetDiscByName(name));
 
@@ -245,34 +344,72 @@
                 ShowRowSeparators = true,
             };
 
-            table.AddColumn(new TableColumn("[underline bold]Name[/]").Centered());
-            table.AddColumn(new TableColumn("[underline bold]Brand[/]").Centered());
-            table.AddColumn(new TableColumn("[underline bold]Type[/]").Centered());
-            table.AddColumn(new TableColumn("[underline bold]Speed[/]").Centered());
-            table.AddColumn(new TableColumn("[underline bold]Glide[/]").Centered());
-            table.AddColumn(new TableColumn("[underline bold]Turn[/]").Centered());
-            table.AddColumn(new TableColumn("[underline bold]Fade[/]").Centered());
+            AnsiConsole.Live(table)
+                .Start(ctx =>
+                {
+                    table.AddColumn(new TableColumn("[underline bold]Name[/]").Centered());
+                    ctx.Refresh();
+                    Thread.Sleep(100); // Simulate loading delay
 
-            foreach (DiscGolfDisc disc in list)
-            {
-                table.AddRow(disc.Name, disc.Brand, disc.Type, "[blue]" + disc.Speed.ToString() + "[/]", "[green]" + disc.Glide.ToString() + "[/]",
-                    "[purple]" + disc.Turn.ToString() + "[/]", "[red]" + disc.Fade.ToString() + "[/]");
-            }
+                    table.AddColumn(new TableColumn("[underline bold]Brand[/]").Centered());
+                    ctx.Refresh();
+                    Thread.Sleep(100); // Simulate loading delay
 
-            AnsiConsole.Write(table);
+                    table.AddColumn(new TableColumn("[underline bold]Type[/]").Centered());
+                    ctx.Refresh();
+                    Thread.Sleep(100); // Simulate loading delay
+
+                    table.AddColumn(new TableColumn("[underline bold]Speed[/]").Centered());
+                    ctx.Refresh();
+                    Thread.Sleep(100); // Simulate loading delay
+
+                    table.AddColumn(new TableColumn("[underline bold]Glide[/]").Centered());
+                    ctx.Refresh();
+                    Thread.Sleep(100); // Simulate loading delay
+
+                    table.AddColumn(new TableColumn("[underline bold]Turn[/]").Centered());
+                    ctx.Refresh();
+                    Thread.Sleep(100); // Simulate loading delay
+
+                    table.AddColumn(new TableColumn("[underline bold]Fade[/]").Centered());
+                    ctx.Refresh();
+                    Thread.Sleep(100); // Simulate loading delay
+
+                    foreach (DiscGolfDisc disc in list)
+                    {
+                        table.AddRow(disc.Name, disc.Brand, disc.Type, "[blue]" + disc.Speed.ToString() + "[/]", "[green]" + disc.Glide.ToString() + "[/]",
+                            "[purple]" + disc.Turn.ToString() + "[/]", "[red]" + disc.Fade.ToString() + "[/]");
+
+                        ctx.Refresh();
+                        Thread.Sleep(100); // Simulate loading delay
+                    }
+
+                });
+            
+
+            AnsiConsole.Markup("\n\n\n[grey]Press any key to return to the main menu...[/]");
+            Console.ReadKey(); // Wait for user input before returning to the main menu
+
+            //foreach (DiscGolfDisc disc in list)
+            //{
+            //    table.AddRow(disc.Name, disc.Brand, disc.Type, "[blue]" + disc.Speed.ToString() + "[/]", "[green]" + disc.Glide.ToString() + "[/]",
+            //        "[purple]" + disc.Turn.ToString() + "[/]", "[red]" + disc.Fade.ToString() + "[/]");
+            //}
+
+            //AnsiConsole.Write(table);
         }
 
         private static void WriteAscii(bool clear)
         {
             if (clear)
-                Console.Clear();
+                Console.Clear();                    
 
             AnsiConsole.MarkupLine("[deepskyblue2]\r\n\r\n██████╗ ██╗███████╗██╗  ██╗    ███████╗██╗███╗   ██╗██████╗ ███████╗██████╗ " +
-                                                 "\r\n██╔══██╗██║██╔════╝██║ ██╔╝    ██╔════╝██║████╗  ██║██╔══██╗██╔════╝██╔══██╗ " +
-                                                 "\r\n██║  ██║██║███████╗█████╔╝     █████╗  ██║██╔██╗ ██║██║  ██║█████╗  ██████╔╝ " +
-                                                 "\r\n██║  ██║██║╚════██║██╔═██╗     ██╔══╝  ██║██║╚██╗██║██║  ██║██╔══╝  ██╔══██╗ " +
-                                                 "\r\n██████╔╝██║███████║██║  ██╗    ██║     ██║██║ ╚████║██████╔╝███████╗██║  ██║ " +
-                                                 "\r\n╚═════╝ ╚═╝╚══════╝╚═╝  ╚═╝    ╚═╝     ╚═╝╚═╝  ╚═══╝╚═════╝ ╚══════╝╚═╝  ╚═╝ [/]");
+                                                     "\r\n██╔══██╗██║██╔════╝██║ ██╔╝    ██╔════╝██║████╗  ██║██╔══██╗██╔════╝██╔══██╗ " +
+                                                     "\r\n██║  ██║██║███████╗█████╔╝     █████╗  ██║██╔██╗ ██║██║  ██║█████╗  ██████╔╝ " +
+                                                     "\r\n██║  ██║██║╚════██║██╔═██╗     ██╔══╝  ██║██║╚██╗██║██║  ██║██╔══╝  ██╔══██╗ " +
+                                                     "\r\n██████╔╝██║███████║██║  ██╗    ██║     ██║██║ ╚████║██████╔╝███████╗██║  ██║ " +
+                                                     "\r\n╚═════╝ ╚═╝╚══════╝╚═╝  ╚═╝    ╚═╝     ╚═╝╚═╝  ╚═══╝╚═════╝ ╚══════╝╚═╝  ╚═╝ [/]");
         }
     }
 }
