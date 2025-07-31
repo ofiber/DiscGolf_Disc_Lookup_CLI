@@ -249,7 +249,6 @@ namespace DiscGolf_Disc_Lookup_CLI
             new DiscGolfDisc("Charger", "Innova", "Distance Driver", 13, 5, -1, 2),
             new DiscGolfDisc("Boss", "Innova", "Distance Driver", 13, 5, -1, 3),
             new DiscGolfDisc("Ape", "Innova", "Distance Driver", 13, 5, 0, 4),
-            new DiscGolfDisc("Charger", "Innova", "Distance Driver", 12, 6, -1, 2),
             new DiscGolfDisc("Juggernaut", "Innova", "Distance Driver", 12, 4, 1, 4),
             new DiscGolfDisc("XCaliber", "Innova", "Distance Driver", 12, 5, 0, 4),
             new DiscGolfDisc("Wahoo", "Innova", "Distance Driver", 12, 6, -2, 2),
@@ -263,14 +262,11 @@ namespace DiscGolf_Disc_Lookup_CLI
             new DiscGolfDisc("Mystere", "Innova", "Distance Driver", 11, 6, -2, 2),
             new DiscGolfDisc("Max", "Innova", "Distance Driver", 11, 3, 0, 5),
             new DiscGolfDisc("Mamba", "Innova", "Distance Driver", 11, 6, -5, 1),
-            new DiscGolfDisc("Max", "Innova", "Distance Driver", 11, 5, 0, 3),
-            new DiscGolfDisc("Orc", "Innova", "Distance Driver", 11, 4, -1, 3),
             new DiscGolfDisc("Krait", "Innova", "Distance Driver", 11, 5, -1, 2),
             new DiscGolfDisc("Archon", "Innova", "Distance Driver", 11, 5, -2, 2),
             new DiscGolfDisc("Starfire", "Innova", "Distance Driver", 10, 4, 0, 3),
             new DiscGolfDisc("Orc", "Innova", "Distance Driver", 10, 4, -1, 3),
             new DiscGolfDisc("Monster", "Innova", "Distance Driver", 10, 3, 0, 5),
-            new DiscGolfDisc("Gorgon", "Innova", "Distance Driver", 10, 6, -3, 1),
             new DiscGolfDisc("Monarch", "Innova", "Distance Driver", 10, 5, -4, 1),
             new DiscGolfDisc("Invictus", "Innova", "Distance Driver", 10, 4, 0, 3),
             new DiscGolfDisc("Gorgon", "Innova", "Distance Driver", 10, 6, -2, 1),
@@ -729,7 +725,7 @@ namespace DiscGolf_Disc_Lookup_CLI
             }
             else
             {
-                throw new KeyNotFoundException($"Disc with name '{name}' not found.");
+                return null;
             }
         }
 

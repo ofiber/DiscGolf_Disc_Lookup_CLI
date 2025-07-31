@@ -18,7 +18,18 @@
                 exitValue = Menu();
             } while (exitValue != 0);
 
-            Console.ReadKey(); // Wait for user input before closing
+
+            WriteAscii(true);
+            Console.WriteLine("\n\n\nThank you for using the Disc Lookup tool!");
+
+            AnsiConsole.Status()
+                    .Spinner(spinner)
+                    .Start("[deepskyblue2]Thank you for using the Disc Lookup tool![/]", ctx =>
+                    {
+                        ctx.Status = "[deepskyblue2]Exiting...[/]";
+                        Thread.Sleep(2500); // Simulate some delay
+                    });
+
         }
 
         private static int Menu()
@@ -325,10 +336,23 @@
             if (name.Substring(0, 1).ToLower() == name.Substring(0, 1))
                 name = name.Replace(name.Substring(0, 1), name.Substring(0, 1).ToUpper());
 
-            List<DiscGolfDisc> disc = new List<DiscGolfDisc>();
-            disc.Add(DiscList.GetDiscByName(name));
+            DiscGolfDisc disc = DiscList.GetDiscByName(name);
 
-            WriteTable(disc);
+            if (disc == null) {
+                AnsiConsole.Status()
+                    .Spinner(spinner)
+                    .Start($"No disc found with the name '[underline bold red]{name}[/]'. Returning to main menu.", ctx =>
+                    {
+                        Thread.Sleep(4500); // Simulate some delay
+                    });
+
+                return;
+            }
+
+            List<DiscGolfDisc> discs = new List<DiscGolfDisc>();
+            discs.Add(disc);
+
+            WriteTable(discs);
         }
 
         private static void WriteTable(List<DiscGolfDisc> list)
