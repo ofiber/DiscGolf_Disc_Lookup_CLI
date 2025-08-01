@@ -408,7 +408,7 @@
 
                     foreach (DiscGolfDisc disc in list)
                     {
-                        table.AddRow(disc.Name, disc.Brand, disc.Type, "[blue]" + disc.Speed.ToString() + "[/]", "[green]" + disc.Glide.ToString() + "[/]",
+                        table.AddRow(disc.Name, disc.Brand, disc.Type, "[deepskyblue2]" + disc.Speed.ToString() + "[/]", "[green]" + disc.Glide.ToString() + "[/]",
                             "[purple]" + disc.Turn.ToString() + "[/]", "[red]" + disc.Fade.ToString() + "[/]");
 
                         ctx.Refresh();
