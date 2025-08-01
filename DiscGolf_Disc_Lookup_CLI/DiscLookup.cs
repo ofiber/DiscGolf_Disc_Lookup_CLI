@@ -366,7 +366,7 @@
         {
             WriteAscii(true);
 
-            Console.WriteLine("\n\n\n\n");
+            Console.WriteLine("\n\n\n");
 
             var table = new Table
             {
@@ -412,22 +412,17 @@
                             "[purple]" + disc.Turn.ToString() + "[/]", "[red]" + disc.Fade.ToString() + "[/]");
 
                         ctx.Refresh();
-                        Thread.Sleep(100); // Simulate loading delay
+
+                        if (list.Count() > 10)
+                            Thread.Sleep(25);
+                        else
+                            Thread.Sleep(150); // Simulate loading delay
                     }
 
                 });
-            
 
             AnsiConsole.Markup("\n\n\n[grey]Press any key to return to the main menu...[/]");
             Console.ReadKey(); // Wait for user input before returning to the main menu
-
-            //foreach (DiscGolfDisc disc in list)
-            //{
-            //    table.AddRow(disc.Name, disc.Brand, disc.Type, "[blue]" + disc.Speed.ToString() + "[/]", "[green]" + disc.Glide.ToString() + "[/]",
-            //        "[purple]" + disc.Turn.ToString() + "[/]", "[red]" + disc.Fade.ToString() + "[/]");
-            //}
-
-            //AnsiConsole.Write(table);
         }
 
         private static void WriteAscii(bool clear)
