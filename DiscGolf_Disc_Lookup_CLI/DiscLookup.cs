@@ -11,6 +11,8 @@
 
         public static void Main()
         {
+            OnStart_Tasks();
+
             int exitValue = -1;
 
             do
@@ -29,7 +31,12 @@
                         ctx.Status = "[deepskyblue2]Exiting...[/]";
                         Thread.Sleep(2500); // Simulate some delay
                     });
+        }
 
+        private static void OnStart_Tasks()
+        {
+            // Ensure UTF-8 encoding for proper character display
+            Console.OutputEncoding = System.Text.Encoding.UTF8;
         }
 
         private static int Menu()
