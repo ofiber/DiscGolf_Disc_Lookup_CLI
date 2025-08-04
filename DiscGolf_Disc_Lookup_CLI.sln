@@ -1,20 +1,26 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.14.36203.30 d17.14
+VisualStudioVersion = 17.14.36203.30
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiscGolf_Disc_Lookup_CLI", "DiscGolf_Disc_Lookup_CLI\DiscGolf_Disc_Lookup_CLI.csproj", "{B0780C36-05BA-4B90-8F2C-EAC4C81604FB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DiscGolf_Disc_Lookup_CLI", "DiscGolf_Disc_Lookup_CLI\DiscGolf_Disc_Lookup_CLI.csproj", "{B0780C36-05BA-4B90-8F2C-EAC4C81604FB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
+		Debug|ARM64 = Debug|ARM64
 		Release|Any CPU = Release|Any CPU
+		Release|ARM64 = Release|ARM64
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{B0780C36-05BA-4B90-8F2C-EAC4C81604FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B0780C36-05BA-4B90-8F2C-EAC4C81604FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B0780C36-05BA-4B90-8F2C-EAC4C81604FB}.Debug|ARM64.ActiveCfg = Debug|ARM64
+		{B0780C36-05BA-4B90-8F2C-EAC4C81604FB}.Debug|ARM64.Build.0 = Debug|ARM64
 		{B0780C36-05BA-4B90-8F2C-EAC4C81604FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B0780C36-05BA-4B90-8F2C-EAC4C81604FB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B0780C36-05BA-4B90-8F2C-EAC4C81604FB}.Release|ARM64.ActiveCfg = Release|ARM64
+		{B0780C36-05BA-4B90-8F2C-EAC4C81604FB}.Release|ARM64.Build.0 = Release|ARM64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
