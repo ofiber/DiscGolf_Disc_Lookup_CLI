@@ -1,4 +1,32 @@
-﻿namespace DiscGolf_Disc_Lookup_CLI
+﻿/*
+ 
+    ██████╗ ██╗███████╗██╗  ██╗    ███████╗██╗███╗   ██╗██████╗ ███████╗██████╗
+    ██╔══██╗██║██╔════╝██║ ██╔╝    ██╔════╝██║████╗  ██║██╔══██╗██╔════╝██╔══██╗
+    ██║  ██║██║███████╗█████╔╝     █████╗  ██║██╔██╗ ██║██║  ██║█████╗  ██████╔╝
+    ██║  ██║██║╚════██║██╔═██╗     ██╔══╝  ██║██║╚██╗██║██║  ██║██╔══╝  ██╔══██╗
+    ██████╔╝██║███████║██║  ██╗    ██║     ██║██║ ╚████║██████╔╝███████╗██║  ██║
+    ╚═════╝ ╚═╝╚══════╝╚═╝  ╚═╝    ╚═╝     ╚═╝╚═╝  ╚═══╝╚═════╝ ╚══════╝╚═╝  ╚═╝
+ 
+
+    This tool allows you to look up disc golf discs by various criteria such as
+    name, brand, type, speed, glide, turn, and fade. It utilizes a predefined list
+    of discs stored in a Dictionary of DiscGolfDisc objects in the DiscList.cs file.
+    It features a user-friendly command-line interface with menus and prompts,
+    and displays results in a formatted table using the Spectre.Console library.
+    It also includes error handling for invalid inputs and searches that yield no results.
+    It is designed to be easily extendable for future enhancements.
+    
+    NOTE: The list of discs is not exhaustive and may not include every disc golf disc on the market.
+          It is being updated as new discs are released and missing discs are found.
+
+    Author: Owen Fiber
+    Date: 8/04/2025
+    License: N/A
+    DiscGolf_Disc_Lookup_CLI - A command-line tool for looking up disc golf discs by various criteria.
+    Version: 1.0
+*/
+
+namespace DiscGolf_Disc_Lookup_CLI
 {
     using System;
     using System.Collections.Generic;
